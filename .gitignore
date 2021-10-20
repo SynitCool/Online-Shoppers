@@ -1,2 +1,8 @@
-__pycache__/*
-.ipynb_checkpoints/*
+.ipynb_checkpoints
+
+# Cache in folder
+cleaning/__pycache__
+evaluating/__pycache__
+model_testing/__pycache__
+modelling/__pycache__
+plotting/__pycache__
