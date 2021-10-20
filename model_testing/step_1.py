@@ -6,15 +6,14 @@ from model_testing.config import DATASET_PATH
 from model_testing.config import OBJECT_COLUMNS
 from model_testing.config import Y_COLUMN
 from model_testing.config import X_OBJECT_COLUMNS
+from model_testing.config import X_CATEGORICAL_COLUMNS
 
 from cleaning.cleaning_data import read_data
 from cleaning.cleaning_data import encode_data
 from cleaning.cleaning_data import onehot_data
 
-from modelling.model_selection import stratified_kfold
 from modelling.model_selection import train_test
 
-from evaluating.evaluate_model import plot_confusion_matrix
 from evaluating.evaluate_model import plot_classification_report
 
 import warnings
@@ -52,6 +51,57 @@ def one_hot_object_columns():
     encoded_df = encode_data(df, [Y_COLUMN])
 
     df = df.drop(columns=X_OBJECT_COLUMNS)
+    df = df.drop(columns=[Y_COLUMN])
+
+    df = pd.concat([df, one_hot_df, encoded_df], axis=1)
+
+    # Modelling
+    X = df.drop(columns=[Y_COLUMN])
+    y = df[Y_COLUMN]
+
+    X_train, X_test, y_train, y_test = train_test(X, y, MODEL)
+
+    for i in range(len(MODEL)):
+        print(f"\nTitle : {MODEL_TITLE[i]}")
+        plot_classification_report(y_test, MODEL[i].predict(X_test))
+
+
+def one_hot_categorical_columns():
+    # Loading Dataset
+    df = read_data(DATASET_PATH)
+
+    # Cleaning Dataset
+    one_hot_df = onehot_data(df, X_CATEGORICAL_COLUMNS)
+    encoded_df = encode_data(df, [Y_COLUMN])
+
+    df = df.drop(columns=X_CATEGORICAL_COLUMNS)
+    df = df.drop(columns=[Y_COLUMN])
+
+    df = pd.concat([df, one_hot_df, encoded_df], axis=1)
+
+    # Modelling
+    X = df.drop(columns=[Y_COLUMN])
+    y = df[Y_COLUMN]
+
+    X_train, X_test, y_train, y_test = train_test(X, y, MODEL)
+
+    for i in range(len(MODEL)):
+        print(f"\nTitle : {MODEL_TITLE[i]}")
+        plot_classification_report(y_test, MODEL[i].predict(X_test))
+
+
+def one_hot_all():
+    # Loading Dataset
+    df = read_data(DATASET_PATH)
+
+    X_columns = list(df.columns)
+    X_columns.remove(Y_COLUMN)
+
+    # Cleaning Dataset
+    one_hot_df = onehot_data(df, X_columns)
+    encoded_df = encode_data(df, [Y_COLUMN])
+
+    df = df.drop(columns=X_columns)
     df = df.drop(columns=[Y_COLUMN])
 
     df = pd.concat([df, one_hot_df, encoded_df], axis=1)

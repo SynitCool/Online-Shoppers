@@ -83,3 +83,20 @@ def train_test(X, y, model, test_size=0.33, random_state=42):
         )
 
     return X_train, X_test, y_train, y_test
+
+
+def packing_run_model(X_train, X_test, y_train, y_test, model):
+    if type(model) != list:
+        raise ValueError("type of model parameter supposed to be list")
+
+    for i in range(len(model)):
+        mdl = model[i]
+        mdl.fit(X_train, y_train)
+
+        train_accuracy, val_accuracy = mdl.score(X_train, y_train), mdl.score(
+            X_test, y_test
+        )
+
+        print(
+            f"Model {i + 1} | training_accuracy : {train_accuracy} | validation_accuracy : {val_accuracy}"
+        )

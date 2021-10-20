@@ -7,4 +7,4 @@ import seaborn as sns
 def plot_correlation(df):
     corr = df.corr()
 
-    sns.heatmap(abs(corr), annot=True)
+    sns.heatmap(round(abs(corr), 2), annot=True)

@@ -1,7 +1,7 @@
 import sys
 import subprocess
 
-PACKAGES = ["numpy", "pandas", "scikit-learn", "matplotlib", "seaborn"]
+PACKAGES = ["numpy", "pandas", "scikit-learn", "matplotlib", "seaborn", "imblearn"]
 
 print(f"Python version : {sys.version}")
 

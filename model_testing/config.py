@@ -19,3 +19,15 @@ DATASET_PATH = "dataset/online_shoppers_intention.csv"
 OBJECT_COLUMNS = ["VisitorType", "Month", "Revenue"]
 X_OBJECT_COLUMNS = ["VisitorType", "Month"]
 Y_COLUMN = "Revenue"
+X_CATEGORICAL_COLUMNS = [
+    "Administrative",
+    "Informational",
+    "ProductRelated",
+    "Month",
+    "OperatingSystems",
+    "Browser",
+    "Region",
+    "TrafficType",
+    "VisitorType",
+    "Weekend",
+]
