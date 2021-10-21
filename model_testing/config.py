@@ -31,3 +31,35 @@ X_CATEGORICAL_COLUMNS = [
     "VisitorType",
     "Weekend",
 ]
+X_CONTINUES_COLUMNS = [
+    "Administrative_Duration",
+    "Informational_Duration",
+    "ProductRelated_Duration",
+    "BounceRates",
+    "ExitRates",
+    "PageValues",
+    "SpecialDay",
+]
+CATEGORICAL_COLUMNS = [
+    "Administrative",
+    "Informational",
+    "ProductRelated",
+    "Month",
+    "OperatingSystems",
+    "Browser",
+    "Region",
+    "TrafficType",
+    "VisitorType",
+    "Weekend",
+    "Revenue",
+]
+CONTINUES_COLUMNS = [
+    "Administrative_Duration",
+    "Informational_Duration",
+    "ProductRelated_Duration",
+    "BounceRates",
+    "ExitRates",
+    "PageValues",
+    "SpecialDay",
+    "Revenue",
+]
