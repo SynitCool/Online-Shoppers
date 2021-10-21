@@ -6,6 +6,11 @@ import seaborn as sns
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 
+import warnings
+from sklearn.exceptions import UndefinedMetricWarning
+
+warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
+
 
 def plot_confusion_matrix(y_true, y_pred, ax=None):
     matrix = confusion_matrix(y_true, y_pred)

@@ -20,9 +20,16 @@ from modelling.model_selection import packing_run_model
 
 from evaluating.evaluate_model import plot_classification_report
 
+from sklearn.model_selection import train_test_split
+
 import warnings
 from sklearn.exceptions import ConvergenceWarning
-from sklearn.model_selection import train_test_split
+from sklearn.exceptions import UndefinedMetricWarning
+
+warnings.filterwarnings("ignore", category=ConvergenceWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 
 
 def over_sampling_smote_model():

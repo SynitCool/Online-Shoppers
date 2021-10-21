@@ -21,8 +21,12 @@ from evaluating.evaluate_model import plot_classification_report
 
 import warnings
 from sklearn.exceptions import ConvergenceWarning
+from sklearn.exceptions import UndefinedMetricWarning
 
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 
 
 def encode_object_columns():
