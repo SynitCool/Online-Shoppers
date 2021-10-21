@@ -6,6 +6,7 @@ from sklearn.feature_selection import chi2
 from sklearn.feature_selection import f_classif
 from sklearn.feature_selection import mutual_info_classif
 from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import r_regression
 
 from sklearn.tree import DecisionTreeClassifier
 
@@ -55,3 +56,16 @@ def selection_decision_tree(X, y, n_k_best=10):
     )[1]
 
     return X_array[:, index_highest]
+
+
+def selection_pearson_correlation(X, y, thresh_corr=0.1):
+    # Init person correlation
+    X_array = np.array(X)
+
+    # Calculate pearson correlation
+    p_corr = r_regression(X, y)
+    thresh_corr = np.array([corr for corr in p_corr if corr >= thresh_corr])
+
+    index_thresh = np.where(np.reshape(thresh_corr, (-1, 1)) == p_corr)[1]
+
+    return X_array[:, index_thresh]
