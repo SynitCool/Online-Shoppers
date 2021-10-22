@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
 from model_testing.config import DATASET_PATH
@@ -273,6 +274,65 @@ def encode_fe_object_columns():
     df = df.drop(columns=obj_columns)
 
     df = pd.concat([df, encoded_df], axis=1)
+
+    # Modelling
+    X = df.drop(columns=[Y_COLUMN])
+    y = df[Y_COLUMN]
+
+    X_train, X_test, y_train, y_test = train_test(X, y, MODEL)
+
+    for i in range(len(MODEL)):
+        print(f"\nTitle : {MODEL_TITLE[i]}")
+        plot_classification_report(y_test, MODEL[i].predict(X_test))
+
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
+
+
+def onehot_select_categorical_columns(thress_sum=10):
+    """
+    Feature engineering after one hot and remove useless values
+
+    process
+    read data --> one hot categorical columns --> remove columns that sum < 10 --> Modelling
+    """
+    # Loading Data and initialize
+    df = read_data(DATASET_PATH)
+
+    # Feature Engineering
+    encoded_df = encode_data(df, [Y_COLUMN])
+    df = df.drop(columns=[Y_COLUMN])
+
+    df = pd.concat([df, encoded_df], axis=1)
+
+    onehot_df = onehot_data(df, X_CATEGORICAL_COLUMNS)
+    onehot_df_sum = np.array(onehot_df.sum(axis=0))
+    onehot_df_sum_thress = np.array(
+        [col_sum for col_sum in onehot_df_sum if col_sum >= thress_sum]
+    )
+    index_sum_thress = np.where(
+        np.reshape(onehot_df_sum_thress, (-1, 1)) == onehot_df_sum
+    )[1]
+
+    onehot_df = np.array(onehot_df)
+    onehot_df = onehot_df[:, index_sum_thress]
+    onehot_df = pd.DataFrame(onehot_df)
+
+    df = df.drop(columns=X_CATEGORICAL_COLUMNS)
+
+    df = pd.concat([df, onehot_df], axis=1)
 
     # Modelling
     X = df.drop(columns=[Y_COLUMN])
