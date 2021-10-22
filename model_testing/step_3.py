@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from model_testing.config import MODEL
 from model_testing.config import MODEL_TITLE
@@ -19,6 +20,7 @@ from sampling.sampling_technique import under_sampling_cluster_centroids
 from modelling.model_selection import packing_run_model
 
 from evaluating.evaluate_model import plot_classification_report
+from evaluating.evaluate_model import plot_confusion_matrix
 
 from sklearn.model_selection import train_test_split
 
@@ -55,6 +57,21 @@ def over_sampling_smote_model():
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
 
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
+
 
 def over_sampling_random_model():
     # Loading dataset
@@ -78,6 +95,21 @@ def over_sampling_random_model():
     for i in range(len(MODEL)):
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
+
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
 
 
 def over_sampling_adasyn_model():
@@ -103,6 +135,21 @@ def over_sampling_adasyn_model():
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
 
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
+
 
 def over_sampling_svmsmote_model():
     # Loading dataset
@@ -126,6 +173,21 @@ def over_sampling_svmsmote_model():
     for i in range(len(MODEL)):
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
+
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
 
 
 def under_sampling_random_model():
@@ -151,6 +213,21 @@ def under_sampling_random_model():
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
 
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
+
 
 def under_sampling_cluster_centroids_model():
     # Loading dataset
@@ -174,3 +251,18 @@ def under_sampling_cluster_centroids_model():
     for i in range(len(MODEL)):
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
+
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])

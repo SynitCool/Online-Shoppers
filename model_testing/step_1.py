@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from model_testing.config import MODEL
 from model_testing.config import MODEL_TITLE
@@ -18,6 +19,7 @@ from cleaning.cleaning_data import onehot_data
 from modelling.model_selection import train_test
 
 from evaluating.evaluate_model import plot_classification_report
+from evaluating.evaluate_model import plot_confusion_matrix
 
 import warnings
 from sklearn.exceptions import ConvergenceWarning
@@ -48,6 +50,21 @@ def encode_object_columns():
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
 
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
+
 
 def one_hot_object_columns():
     # Loading Dataset
@@ -71,6 +88,21 @@ def one_hot_object_columns():
     for i in range(len(MODEL)):
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
+
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
 
 
 def one_hot_categorical_columns():
@@ -96,6 +128,20 @@ def one_hot_categorical_columns():
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
 
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
 
 def one_hot_all():
     # Loading Dataset
@@ -123,6 +169,20 @@ def one_hot_all():
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
 
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
 
 def encode_categorical_model():
     # Loading Dataset
@@ -146,6 +206,20 @@ def encode_categorical_model():
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
 
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
 
 def one_hot_categorical_model():
     # Loading Dataset
@@ -173,6 +247,20 @@ def one_hot_categorical_model():
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
 
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
 
 def continues_model():
     # Loading Dataset
@@ -196,6 +284,20 @@ def continues_model():
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
 
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])
 
 def one_hot_continues_model():
     # Loading Dataset
@@ -222,3 +324,18 @@ def one_hot_continues_model():
     for i in range(len(MODEL)):
         print(f"\nTitle : {MODEL_TITLE[i]}")
         plot_classification_report(y_test, MODEL[i].predict(X_test))
+
+    fig, ax = plt.subplots(figsize=(15, 9), nrows=2, ncols=2)
+
+    for i in range(4):
+        y_pred = MODEL[i].predict(X_test)
+        if i < 2:
+            plot_confusion_matrix(y_test, y_pred, ax=ax[0, i])
+
+            ax[0, i].set_title(MODEL_TITLE[i])
+        else:
+            i_ = i - 2
+
+            plot_confusion_matrix(y_test, y_pred, ax=ax[1, i_])
+
+            ax[1, i_].set_title(MODEL_TITLE[i])

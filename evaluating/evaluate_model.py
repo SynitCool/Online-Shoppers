@@ -19,8 +19,14 @@ def plot_confusion_matrix(y_true, y_pred, ax=None):
 
     if ax:
         sns.heatmap(df_matrix, annot=True, ax=ax)
+
+        ax.set_xlabel("Predicted Label")
+        ax.set_ylabel("Actual Label")
     else:
         sns.heatmap(df_matrix, annot=True)
+
+        plt.xlabel("Predicted Label")
+        plt.y_label("Actual Label")
 
 
 def plot_classification_report(y_true, y_pred):
