@@ -47,7 +47,3 @@ def encode_object_columns():
     model.fit(X, y)
 
     save_object(model, file_path)
-
-    model = load_object(file_path)
-
-    print(model.score(X, y))
